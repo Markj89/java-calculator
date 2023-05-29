@@ -2,6 +2,7 @@ import java.lang.Math;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+        Double answer = null;
         Scanner calObject = new Scanner(System.in);
 
         System.out.println();
@@ -13,7 +14,11 @@ public class Main {
         System.out.println(); // Operators
         String secondField = calObject.nextLine();
 
-        Double answer = calculate(firstField, operator, secondField);
+        System.out.println();
+        String equals = calObject.nextLine();
+        if (equals.equals("=")) {
+            answer = calculate(firstField, operator, secondField);
+        }
 
         System.out.println(answer);
     }
