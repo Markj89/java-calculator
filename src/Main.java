@@ -2,46 +2,40 @@ import java.lang.Math;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        Double answer = null;
-        Scanner calObject = new Scanner(System.in);
+        System.out.println("Calculator on: \n");
+        Scanner inputNum1 = new Scanner(System.in);
+        Scanner inputOperator = new Scanner(System.in);
+        Scanner inputNum2 = new Scanner(System.in);
+        char operator;
+        double firstField, secondField;
+        double answer;
 
-        System.out.println();
-        String firstField = calObject.nextLine();
+        while (true) {
+            System.out.println();
+            firstField = inputNum1.nextDouble();
 
-        System.out.println(); // Operators
-        String operator = calObject.nextLine();
+            System.out.println();
+            secondField = inputNum2.nextDouble();
 
-        System.out.println(); // Operators
-        String secondField = calObject.nextLine();
+            System.out.println(); // Operators
+            System.out.print("Operator: ");
+            operator = inputOperator.next().charAt(0);
 
-        System.out.println();
-        String equals = calObject.nextLine();
-        if (equals.equals("=")) {
             answer = calculate(firstField, operator, secondField);
+            System.out.println("Your Answer is " + answer);
         }
-
-        System.out.println(answer);
     }
 
-    public static Double calculate(String strA,  String operator, String strB) {
+    public static Double calculate(Double strA, Character operator, Double strB) {
 
         double r = 0;
 
         switch (operator) {
-            case "/":
-                r += Double.parseDouble(strA) / Double.parseDouble(strB);
-                break;
-            case "+":
-                r += Double.parseDouble(strA) + Double.parseDouble(strB);
-                break;
-            case "-":
-                r += Double.parseDouble(strA) - Double.parseDouble(strB);
-                break;
-            case "*":
-                r += Double.parseDouble(strA) * Double.parseDouble(strB);
-                break;
-            default:
-                r = 0;
+            case '/' -> r += strA / strB;
+            case '+' -> r += strA + strB;
+            case '-' -> r += strA - strB;
+            case '*' -> r += strA * strB;
+            default -> r = 0;
         }
 
         return r;
