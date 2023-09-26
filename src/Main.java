@@ -1,43 +1,48 @@
 import java.lang.Math;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Java Calculator
+ * @author marcusjackson
+ *
+ * Logic:
+ *
+ * Store fields in a array.
+ */
 public class Main {
+    // REGEX
+    public static final String DOUBLE_PATTERN = "[/+,-,/*,//,-]";;
+    public static final String INTEGER_PATTERN = "(\\\\d+)";
+
+    // Field
+    public static ArrayList<String> fields = new ArrayList<String>();
+
     public static void main(String[] args) {
         System.out.println("Calculator on: \n");
-        Scanner inputNum1 = new Scanner(System.in);
-        Scanner inputOperator = new Scanner(System.in);
-        Scanner inputNum2 = new Scanner(System.in);
-        char operator;
-        double firstField, secondField;
-        double answer;
+        String newField = new String();
+        operand(newField);
 
-        while (true) {
-            System.out.println();
-            firstField = inputNum1.nextDouble();
-
-            System.out.println();
-            secondField = inputNum2.nextDouble();
-
-            System.out.println(); // Operators
-            System.out.print("Operator: ");
-            operator = inputOperator.next().charAt(0);
-
-            answer = calculate(firstField, operator, secondField);
-            System.out.println("Your Answer is " + answer);
-        }
     }
 
-    public static Double calculate(Double strA, Character operator, Double strB) {
+    public static void operand(String digits) {
+        Pattern pattern = Pattern.compile(DOUBLE_PATTERN);
+        Matcher digit = pattern.matcher(digits);
+        System.out.println("Write you fields... ");
+        Scanner calObject = new Scanner(System.in);
 
-        double r = 0;
+        while (calObject.hasNext()) {
+            System.out.println();
+            if (calObject.equals("=")) {
+                System.out.println("Lets calculate");
+            } else {
+                fields.add(calObject.next());
+            }
 
-        switch (operator) {
-            case '/' -> r += strA / strB;
-            case '+' -> r += strA + strB;
-            case '-' -> r += strA - strB;
-            case '*' -> r += strA * strB;
-            default -> r = 0;
+            //int t = Integer.parseInt(digits.substring(digit.start(), digit.end()));
+            //fields.add(String.valueOf(t));
         }
-
-        return r;
     }
 }
